@@ -286,12 +286,18 @@ a = [   ['Meeting','2023-07-28', '10:00', '12:00'],['Lunch','2023-07-28', '14:00
         ['trip','2023-07-31', '11:00', '15:30'],['Lunch','2023-08-01', '15:00', '21:30'],
         ['Lunch','2023-08-02', '09:00', '15:30'],['school','2023-08-03', '09:00', '15:30']
      ]
+     
+schedule_name = []
+for i in a:
+  schedule_name.append(i[0])
+#之後用來比對
 
 schedule_list1 = [
     ['Task1', 3, 4, '2023-08-01 16:00:00'],
     ['Task2', 1, 2, '2023-08-02 16:00:00'],
     ['Task3', 2, 3, '2023-08-01 16:00:00'],
-    ['Task4', 2, 4, '2023-08-01 16:00:00']
+    ['Task4', 2, 4, '2023-08-01 16:00:00'],
+    ['Task5', 2, 15, '2023-08-01 16:00:00']
 ]   #  名稱, 重要度, 大約需要時間,截止時間
 
 calendar = Calender_schedule()
@@ -357,6 +363,7 @@ class Calender_main(tk.Frame):
     self.createTimes() 
     self.creatWidget()
     self.schedule_generate()
+    self.creat_none()
   def createDays(self):
     start_day = day_list[0]
     day_list_use = []
@@ -398,6 +405,7 @@ class Calender_main(tk.Frame):
     font4 = tkFont.Font(size = 12, family = 'Times New Roman')
     output_processed = []
     date_first = day_list[0]
+    
     for i in range(len(output)):
       date_now = output[i][1] + '/' + output[i][2]
       date_now = datetime.strptime(date_now, "%m/%d")
@@ -406,12 +414,23 @@ class Calender_main(tk.Frame):
       start_time = int(output[i][3][:2])
       end_time = int(output[i][4][:2])
       output_processed.append([column_now,(start_time-8+1),(end_time-8),output[i][5]])
-    print(output_processed)
     for i in output_processed:
       new_work = tk.Button(self, text = i[3],height = ((i[2])\
                 - i[1])*3, width = 4,font = font4, command = self.widgetCommand) 
       new_work.grid(row = i[1], column = i[0],rowspan = (i[2])\
-                - i[1]+1)      
+                - i[1]+1) 
+      if schedule_name.count(i[3]) != 0:        
+        new_work.configure(bg="yellow")  
+      else:
+        new_work.configure(bg="green")  
+  def creat_none(self):
+    print(cannot_be_schedule)
+    '''
+    if cannot_be_schedule != []:
+      font1 = tkFont.Font(size = 18, family = 'Times New Roman')
+      cont_title = tk.Label(self, text = '無法排入的事項:', font = font1) 
+      for i in range(len(cannot_be_schedule)) 
+    '''       
 cal = Calender_main()
 cal.master.title('日歷')
 cal.mainloop()
