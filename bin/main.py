@@ -1,6 +1,16 @@
 import tkinter as tk
 import tkinter.font as tkFont
 
+class event_annotation(tk.Frame):
+  def __init__(self):
+    tk.Frame.__init__(self)
+    self.creat_annotation()
+    
+  def creat_annotation(self):
+    font1 = tkFont.Font(size = 18, family = 'Times New Roman')
+    self.inputbox_event = tk.Text(self, height = 7, width = 15,font = font1)
+    
+
 class Calender_main(tk.Frame):
   def __init__(self):
     tk.Frame.__init__(self)
@@ -40,11 +50,16 @@ class Calender_main(tk.Frame):
     font3 = tkFont.Font(size = 18, family = 'Times New Roman')
     for i in range(1, 8):
       for a in range(1,11):
-        workAppend = tk.Button(self, text = '[]',height = 1, width = 4,font = font3)
+        workAppend = tk.Button(self, text = '  ',height = 1, width = 4,font = font3,\
+                               command = self.widgetCommand)
         workAppend.grid(row = a, column = i)
-
-  #def widgetCommand(self): 還沒用到，預計是用來處理點擊每一個按鈕之後的command
-    
+  def widgetCommand(self): 
+    newWindow = tk.Toplevel(self)
+    font1 = tkFont.Font(size = 18, family = 'Times New Roman')
+    remind = tk.Label(newWindow, text = '請輸入該事項的詳細資訊', font = font1)
+    remind.grid(row = 0,column = 0)
+    a = tk.Text(newWindow, height = 7, width = 15,font = font1)
+    a.grid(row = 1,column = 0)
 cal = Calender_main()
 cal.master.title('日歷')
 cal.mainloop()
