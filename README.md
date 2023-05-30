@@ -8,4 +8,4 @@
 
 ![image](視窗1.jpg)
 
-![image](視窗2.jpg)
+![image](視窗2.png)
