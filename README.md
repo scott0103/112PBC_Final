@@ -5,13 +5,7 @@
 本專案是112年度下學期，商管程式設計課程的期末專案。以python製作，目標是做出能夠以演算法自動排程的行事曆。
 >>**展示影片**
 
-
-<video src="基本運行_解說.mp4" controls="controls" width="500" height="300"></video>
-```HTML
-<video width="320" height="240" controls>
-    <source src="基本運行_解說.mp4" type="video/mp4">
-</video>
-```
+>>檔案中的''基本運行_解說.mp4''是程式的基礎解說影片 請不懂的同學稍微看一下
 
 ## 簡介
 
