@@ -7,10 +7,11 @@
 
 
 <video src="基本運行_解說.mp4" controls="controls" width="500" height="300"></video>
-
+```HTML
 <video width="320" height="240" controls>
-<source src="基本運行_解說.mp4" type="video/mp4">
+    <source src="基本運行_解說.mp4" type="video/mp4">
 </video>
+```
 
 ## 簡介
 
