@@ -321,7 +321,7 @@ def to_algorithm(fixedtimetable, demand):
         out_put = [demand[0]]
         #print(demand[0])
     return out_put
-
+'''
 # 使用範例
 a = [   ['普通心理學','2023-07-28', '09:00', '12:00'],['消費者行為','2023-07-29', '14:00', '17:20'],
         ['商管程','2023-07-28', '17:00', '21:00'],['討論報告','2023-07-30', '12:00', '13:00'],
@@ -358,7 +358,7 @@ for i in a:
 
 schedule_list1 = cal2.return_input
  #  名稱, 重要度, 大約需要時間,截止時間
-'''
+
 
 calendar = Calender_schedule()
 for event_data in a:
