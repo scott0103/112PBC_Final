@@ -4,9 +4,7 @@ import calendar
 import datetime
 from datetime import datetime, timedelta, date
 from collections import defaultdict
-import os
 
-demo = os.open('demo.txt', os.O_RDWR|os.O_CREAT)
 
 class input_main(tk.Frame):
   def __init__(self,return_input):
@@ -16,13 +14,15 @@ class input_main(tk.Frame):
     self.creatDefine()
     self.creat_input()
     self.button_set()
-    
+#啟動視窗的基本函數 本視窗是用來輸入固定事項
+   
   def creatDefine(self):
     font1 = tkFont.Font(size = 18, family = 'Times New Roman')
     self.print = tk.Label(self, text = '請輸入固定事項:', font = font1)
     self.print.grid(row = 0,column = 0, columnspan = 4, sticky = tk.W)
     self.print.configure(bg = 'azure')
-    
+#利用label加上說明文字
+   
   def creat_input(self):
     font1 = tkFont.Font(size = 18, family = 'Times New Roman')
     self.inputbox_event = tk.Text(self, height = 1, width = 12,font = font1)
@@ -55,7 +55,8 @@ class input_main(tk.Frame):
     self.inputbox_time_1.configure(bg = 'lightcyan')
     self.cc.configure(bg = 'azure')
     self.inputbox_time_2.configure(bg = 'lightcyan')
-    
+#輸入格部分
+   
   def button_set(self):
     font1 = tkFont.Font(size = 15, family = 'Times New Roman')
     self.next = tk.Button(self, text = '輸入下一個', font = font1,\
@@ -68,6 +69,7 @@ class input_main(tk.Frame):
     self.fin.grid(row = 6, column = 0, columnspan = 4, sticky = tk.W)
     self.next.configure(bg = 'paleturquoise')
     self.fin.configure(bg = 'paleturquoise')
+#按鈕部分
     
   def button_function_collect(self,return_input):
     if self.inputbox_event.get(0.0, 'end') != '' and\
@@ -83,7 +85,8 @@ class input_main(tk.Frame):
       self.inputbox_time_1.delete(0.0, 'end')
       self.inputbox_time_2.delete(0.0, 'end')
     return return_input
-    
+#按鈕功能一:紀錄輸入
+  
   def button_function_return(self,return_input):
     self.return_input = return_input
     self.master.destroy()
@@ -91,6 +94,7 @@ return_input = []
 cal = input_main(return_input)
 cal.master.title('輸入你的固定事項')
 cal.mainloop()
+#按鈕功能二:進入下個視窗
 
 #下面開始是第二個視窗
 
@@ -102,6 +106,7 @@ class input_todo(tk.Frame):
     self.creatDefine()
     self.creat_input()
     self.button_set()
+#初始函數 本視窗是用來輸入尚未排程的待辦事項
 
   def creatDefine(self):
     font1 = tkFont.Font(size = 18, family = 'Times New Roman')
@@ -127,7 +132,8 @@ class input_todo(tk.Frame):
     self.reminder = tk.Label(self, text = '日期輸入格式為YYYY-MM-DD', font = font1)
     self.reminder.grid(row = 9,column = 0, columnspan = 4, sticky = tk.W)
     self.reminder.configure(bg = 'azure')
-    
+#說明文字部分 
+ 
   def creat_input(self):
     font1 = tkFont.Font(size = 18, family = 'Times New Roman')
     
@@ -146,6 +152,7 @@ class input_todo(tk.Frame):
     self.inputbox_importance.configure(bg = 'lightcyan')
     self.inputbox_time_long.configure(bg = 'lightcyan')
     self.inputbox_deadline.configure(bg = 'lightcyan')
+#輸入格部分
 
   def button_set(self):
     font1 = tkFont.Font(size = 15, family = 'Times New Roman')
@@ -159,7 +166,8 @@ class input_todo(tk.Frame):
     self.fin.grid(row = 11, column = 0, columnspan = 4, sticky = tk.W)
     self.next.configure(bg = 'paleturquoise')
     self.fin.configure(bg = 'paleturquoise')
-    
+#按鈕部分
+   
   def button_function_collect(self,return_input_2):
     if self.inputbox_event.get(0.0, 'end') != '' and\
        self.inputbox_importance.get(0.0, 'end') != '' and\
@@ -174,15 +182,20 @@ class input_todo(tk.Frame):
       self.inputbox_time_long.delete(0.0, 'end')
       self.inputbox_deadline.delete(0.0, 'end')
     return return_input_2
-    
+#按鈕功能一:記錄輸入
+   
   def button_function_return(self,return_input_2):
     self.return_input = return_input_2
     self.master.destroy()
+#按鈕功能二:進入下個視窗
 
 return_input_2 = []
 cal2 = input_todo(return_input_2)
 cal2.master.title('輸入你的待辦事項')
 cal2.mainloop()
+#兩個視窗收到的資料分別是cal.return_input,cal2.return_input
+
+#接下來是排程演算法部分
 
 # 固定List == 名稱, 日期, 開始, 結束
 # 排程list == 名稱, 重要度, 大約需要時間,截止時間
@@ -460,7 +473,8 @@ class Calender_main(tk.Frame):
     self.creatWidget()
     self.schedule_generate()
     self.creat_none()
-    
+#初始函數，生成日歷視窗
+   
   def createDays(self):
     start_day = day_list[0]
     day_list_use = []
@@ -474,13 +488,15 @@ class Calender_main(tk.Frame):
                                  width = 3, font = font1)   
       column_weekdays.grid(row = 0, column = i+1, sticky = tk.W)
       column_weekdays.configure(bg = 'azure')
-      
+#根據輸入的日期範圍顯現日期
+    
   def createTimes(self):
     font2 = tkFont.Font(size = 18, family = 'Times New Roman')
     for i in range(13):
       row_times = tk.Label(self, text = str(8+i)+'-'+str(8+i+1), font = font2)
       row_times.grid(row = i+1, column = 0)
       row_times.configure(bg = 'azure')
+#可使用時間:8.-21.
       
   def creatWidget(self):
     font3 = tkFont.Font(size = 18, family = 'Times New Roman')
@@ -491,6 +507,7 @@ class Calender_main(tk.Frame):
         workAppend = tk.Button(self, text = '  ',height = 1, width = 10,font = font3)
         workAppend.grid(row = a, column = i)
         workAppend.configure(bg = 'azure')
+#創造基底，用按鈕是方便未來更新功能
         
   def widgetCommand(self): 
     newWindow = tk.Toplevel(self)
@@ -501,7 +518,8 @@ class Calender_main(tk.Frame):
     remind.grid(row = 1,column = 0)
     input_command = tk.Text(newWindow, height = 7, width = 15,font = font1)
     input_command.grid(row = 2,column = 0,columnspan = 10)
-    
+#按鈕的機能，不過目前實用性有限
+   
   def schedule_generate(self):
   #output的每一項是[YYYY,MM,DD,開始時間,結束時間,名稱]
     font4 = tkFont.Font(size = 12, family = 'Times New Roman')
@@ -526,6 +544,7 @@ class Calender_main(tk.Frame):
         new_work.configure(bg="aquamarine")  
       else:
         new_work.configure(bg="skyblue")  
+#生出所有酷酷的行程
         
   def creat_none(self):
     if cannot_be_schedule != []:
@@ -537,6 +556,8 @@ class Calender_main(tk.Frame):
         cant_arrange = tk.Label(self, text = cannot_be_schedule[i], font = font1) 
         cant_arrange.grid(row = i+1, column = days_needed + 2,columnspan = 3) 
         cant_arrange.configure(bg = 'azure')
+#沒辦法排程的事件會在這裡顯現出來
+
 cal = Calender_main()
 cal.master.title('日歷')
 cal.mainloop()
