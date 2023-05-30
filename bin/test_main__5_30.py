@@ -4,9 +4,9 @@ import calendar
 import datetime
 from datetime import datetime, timedelta, date
 from collections import defaultdict
+import os
 
-import tkinter as tk
-import tkinter.font as tkFont
+demo = os.open('demo.txt', os.O_RDWR|os.O_CREAT)
 
 class input_main(tk.Frame):
   def __init__(self,return_input):
@@ -323,11 +323,11 @@ def to_algorithm(fixedtimetable, demand):
     return out_put
 
 # 使用範例
-a = [   ['Meeting','2023-07-28', '10:00', '12:00'],['Lunch','2023-07-28', '14:00', '15:30'],
-        ['Meeting','2023-07-29', '09:00', '11:00'],['Lunch','2023-07-29', '12:00', '13:30'],
-        ['Lunch','2023-07-30', '14:00', '15:30'],['tutor','2023-07-30', '19:00', '21:30'],
-        ['trip','2023-07-31', '11:00', '15:30'],['Lunch','2023-08-01', '15:00', '21:30'],
-        ['Lunch','2023-08-02', '09:00', '15:30'],['school','2023-08-03', '09:00', '15:30']
+a = [   ['普通心理學','2023-07-28', '09:00', '12:00'],['消費者行為','2023-07-29', '14:00', '17:20'],
+        ['商管程','2023-07-28', '17:00', '21:00'],['討論報告','2023-07-30', '12:00', '13:00'],
+        ['會計一上','2023-07-31', '14:00', '17:30'],['家教','2023-07-30', '19:00', '21:00'],
+        ['討論報告','2023-07-31', '11:00', '12:00'],['社團活動','2023-08-01', '15:00', '21:30'],
+        ['休息','2023-08-02', '09:00', '15:30'],['休息','2023-08-03', '09:00', '15:30']
      ]
 
 schedule_name = []
@@ -450,7 +450,6 @@ for date, values in total_space_day.items():
 
 #進入生出日曆的階段
 
-
 class Calender_main(tk.Frame):
   def __init__(self):
     tk.Frame.__init__(self)
@@ -489,7 +488,7 @@ class Calender_main(tk.Frame):
     #橫
       for a in range(1,14):
       #直
-        workAppend = tk.Button(self, text = '  ',height = 1, width = 4,font = font3)
+        workAppend = tk.Button(self, text = '  ',height = 1, width = 10,font = font3)
         workAppend.grid(row = a, column = i)
         workAppend.configure(bg = 'azure')
         
@@ -500,15 +499,14 @@ class Calender_main(tk.Frame):
     remind = tk.Label(newWindow, text = '請輸入該事項的詳細資訊', font = font1)
     title_now.grid(row = 0,column = 0)
     remind.grid(row = 1,column = 0)
-    a = tk.Text(newWindow, height = 7, width = 15,font = font1)
-    a.grid(row = 2,column = 0)
+    input_command = tk.Text(newWindow, height = 7, width = 15,font = font1)
+    input_command.grid(row = 2,column = 0,columnspan = 10)
     
   def schedule_generate(self):
   #output的每一項是[YYYY,MM,DD,開始時間,結束時間,名稱]
     font4 = tkFont.Font(size = 12, family = 'Times New Roman')
     output_processed = []
     date_first = day_list[0]
-    
     for i in range(len(output)):
       date_now = output[i][1] + '/' + output[i][2]
       date_now = datetime.strptime(date_now, "%m/%d")
@@ -519,7 +517,7 @@ class Calender_main(tk.Frame):
       output_processed.append([column_now,(start_time-8+1),(end_time-8),output[i][5]])
     for i in output_processed:
       new_work = tk.Button(self, text = i[3],height = ((i[2])- i[1])*3,\
-                           width = 4,font = font4,\
+                           width = 10,font = font4,\
                            activebackground='turquoise',\
                            command = self.widgetCommand) 
       new_work.grid(row = i[1], column = i[0],rowspan = (i[2])\
