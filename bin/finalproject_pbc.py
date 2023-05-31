@@ -5,21 +5,24 @@ import datetime
 from datetime import datetime, timedelta, date
 from collections import defaultdict
 
-import tkinter as tk
-import tkinter.font as tkFont
 
 class input_main(tk.Frame):
   def __init__(self,return_input):
     tk.Frame.__init__(self)
+    self.configure(bg = 'azure')
     self.grid()
     self.creatDefine()
     self.creat_input()
     self.button_set()
-    
+#啟動視窗的基本函數 本視窗是用來輸入固定事項
+   
   def creatDefine(self):
     font1 = tkFont.Font(size = 18, family = 'Times New Roman')
     self.print = tk.Label(self, text = '請輸入固定事項:', font = font1)
     self.print.grid(row = 0,column = 0, columnspan = 4, sticky = tk.W)
+    self.print.configure(bg = 'azure')
+#利用label加上說明文字
+   
   def creat_input(self):
     font1 = tkFont.Font(size = 18, family = 'Times New Roman')
     self.inputbox_event = tk.Text(self, height = 1, width = 12,font = font1)
@@ -32,26 +35,42 @@ class input_main(tk.Frame):
     
     self.reminder = tk.Label(self, text = '日期輸入格式為YYYY-MM-DD', font = font1)
     self.reminder.grid(row = 3,column = 0, columnspan = 4, sticky = tk.W)
+    self.reminder.configure(bg = 'azure')
     self.reminder = tk.Label(self, text = '時間輸入格式是HH:MM,24小時制', font = font1)
     self.reminder.grid(row = 4,column = 0, columnspan = 4, sticky = tk.W)
-    
+    self.reminder.configure(bg = 'azure')
     
     self.named.grid(row = 1, column = 0, columnspan = 2, sticky = tk.W)
     self.inputbox_event.grid(row = 1, column = 2, sticky = tk.W)
+    self.named.configure(bg = 'azure')
+    self.inputbox_event.configure(bg = 'lightcyan')
     
     self.dateName.grid(row = 2, column = 0, columnspan = 2, sticky = tk.W)
     self.inputbox_Date.grid(row = 2, column = 2, sticky = tk.W)
     self.inputbox_time_1.grid(row = 2, column = 3, sticky = tk.W)
     self.cc.grid(row = 2, column = 4, sticky = tk.W)
     self.inputbox_time_2.grid(row = 2, column = 5, sticky = tk.W)
+    self.dateName.configure(bg = 'azure')
+    self.inputbox_Date.configure(bg = 'lightcyan')
+    self.inputbox_time_1.configure(bg = 'lightcyan')
+    self.cc.configure(bg = 'azure')
+    self.inputbox_time_2.configure(bg = 'lightcyan')
+#輸入格部分
+   
   def button_set(self):
     font1 = tkFont.Font(size = 15, family = 'Times New Roman')
     self.next = tk.Button(self, text = '輸入下一個', font = font1,\
+                          activebackground='turquoise',
                           command = lambda: self.button_function_collect(return_input))
     self.fin = tk.Button(self, text = '完成輸入，進入下一頁', font = font1,\
+                         activebackground='turquoise',
                          command= lambda: self.button_function_return(return_input))
     self.next.grid(row = 5, column = 0, columnspan = 4, sticky = tk.W)
     self.fin.grid(row = 6, column = 0, columnspan = 4, sticky = tk.W)
+    self.next.configure(bg = 'paleturquoise')
+    self.fin.configure(bg = 'paleturquoise')
+#按鈕部分
+    
   def button_function_collect(self,return_input):
     if self.inputbox_event.get(0.0, 'end') != '' and\
        self.inputbox_Date.get(0.0, 'end') != '' and\
@@ -66,6 +85,8 @@ class input_main(tk.Frame):
       self.inputbox_time_1.delete(0.0, 'end')
       self.inputbox_time_2.delete(0.0, 'end')
     return return_input
+#按鈕功能一:紀錄輸入
+  
   def button_function_return(self,return_input):
     self.return_input = return_input
     self.master.destroy()
@@ -73,17 +94,20 @@ return_input = []
 cal = input_main(return_input)
 cal.master.title('輸入你的固定事項')
 cal.mainloop()
+#按鈕功能二:進入下個視窗
 
 #下面開始是第二個視窗
 
 class input_todo(tk.Frame):
   def __init__(self,return_input):
     tk.Frame.__init__(self)
+    self.configure(bg = 'azure')
     self.grid()
     self.creatDefine()
     self.creat_input()
     self.button_set()
-    
+#初始函數 本視窗是用來輸入尚未排程的待辦事項
+
   def creatDefine(self):
     font1 = tkFont.Font(size = 18, family = 'Times New Roman')
     self.print = tk.Label(self, text = '請輸入你的待辦事項:', font = font1)
@@ -99,9 +123,17 @@ class input_todo(tk.Frame):
     self.def_3.grid(row = 5,column = 0, columnspan = 4, sticky = tk.W)
     self.def_4.grid(row = 7,column = 0, columnspan = 4, sticky = tk.W)
     
+    self.print.configure(bg = 'azure')
+    self.def_1.configure(bg = 'azure')
+    self.def_2.configure(bg = 'azure')
+    self.def_3.configure(bg = 'azure')
+    self.def_4.configure(bg = 'azure')
+    
     self.reminder = tk.Label(self, text = '日期輸入格式為YYYY-MM-DD', font = font1)
     self.reminder.grid(row = 9,column = 0, columnspan = 4, sticky = tk.W)
-    
+    self.reminder.configure(bg = 'azure')
+#說明文字部分 
+ 
   def creat_input(self):
     font1 = tkFont.Font(size = 18, family = 'Times New Roman')
     
@@ -115,15 +147,27 @@ class input_todo(tk.Frame):
     self.inputbox_importance.grid(row = 4, column = 1, sticky = tk.W)
     self.inputbox_time_long.grid(row = 6, column = 1, sticky = tk.W)
     self.inputbox_deadline.grid(row = 8, column = 1, sticky = tk.W)
+    
+    self.inputbox_event.configure(bg = 'lightcyan')
+    self.inputbox_importance.configure(bg = 'lightcyan')
+    self.inputbox_time_long.configure(bg = 'lightcyan')
+    self.inputbox_deadline.configure(bg = 'lightcyan')
+#輸入格部分
 
   def button_set(self):
     font1 = tkFont.Font(size = 15, family = 'Times New Roman')
     self.next = tk.Button(self, text = '輸入下一個', font = font1,\
+                          activebackground='turquoise',\
                           command = lambda: self.button_function_collect(return_input_2))
     self.fin = tk.Button(self, text = '完成輸入，進入下一頁', font = font1,\
+                         activebackground='turquoise',\
                          command= lambda: self.button_function_return(return_input_2))
     self.next.grid(row = 10, column = 0, columnspan = 4, sticky = tk.W)
     self.fin.grid(row = 11, column = 0, columnspan = 4, sticky = tk.W)
+    self.next.configure(bg = 'paleturquoise')
+    self.fin.configure(bg = 'paleturquoise')
+#按鈕部分
+   
   def button_function_collect(self,return_input_2):
     if self.inputbox_event.get(0.0, 'end') != '' and\
        self.inputbox_importance.get(0.0, 'end') != '' and\
@@ -138,58 +182,71 @@ class input_todo(tk.Frame):
       self.inputbox_time_long.delete(0.0, 'end')
       self.inputbox_deadline.delete(0.0, 'end')
     return return_input_2
+#按鈕功能一:記錄輸入
+   
   def button_function_return(self,return_input_2):
     self.return_input = return_input_2
     self.master.destroy()
+#按鈕功能二:進入下個視窗
 
 return_input_2 = []
 cal2 = input_todo(return_input_2)
 cal2.master.title('輸入你的待辦事項')
 cal2.mainloop()
+#兩個視窗收到的資料分別是cal.return_input,cal2.return_input
 
-# 固定List == 名稱, 日期, 開始, 結束
-# 排程list == 名稱, 重要度, 大約需要時間,截止時間
-#重要程度 1,2,3
+#接下來是排程演算法部分
+
+# 固定List == [名稱, 日期, 開始時間, 結束時間]
+# 排程list == [名稱, 重要度, 大約需要時間,截止時間]
+#重要程度分為1,2,3
 #若時間衝突到，就先做1
 #1 : 時間內一定要做完 優先順位最高 
 #2 : 時間內一定要做完
-#3 :時間內能做完最好 沒做完也沒差   
-# 找差距最少的
-#空閒時間完成
-#找enoughtime
-#排進schedule
+#3 : 時間內能做完最好 沒做完也沒差   
 
-cur_day = datetime.now().date()
+'''
+演算法作法:
+            先將固定事項整理好匯至class裡，然後將固定事項的第一天到每日的空閒時段找出來，將要排程的事項依照重要度排列好後
+            ，找空閒時段內與該需要排程的任務所需時數差最少的(避免浪費)排進去，並將排進去後的任務再用add_fixed_event函數將她加進self.events裡
+            並且在重新找新的固定事項，如上述進行迴圈，直到所有任務排完為止。
+
+            需排程任務的排序方法是 離要排的日最近的先排 重要度 所需時間由小到大
+'''
+
 
 class Calender_schedule:
 
     def __init__(self):
         self.events = defaultdict(dict)
     
-    def add_fixed_event(self,name, date, start_time, end_time):  #綁定到固定輸入畫面的完成輸入 #重複的固定時間要排除
+    def add_fixed_event(self,name, date, start_time, end_time):  #將日期綁定到固定輸入畫面的完成輸入 #重複的固定時間要排除
         
         event = {'start_time': start_time, 'end_time':end_time, 'name': name}
-        self.events[date][start_time] = event
+        self.events[date][start_time] = event          #self.event是一個多層dict:{date:{start_time:{'start_time': start_time, 'end_time':end_time, 'name': name}}}
 
-    def view_calendar(self):
+    def find_recent_day(self):    #找固定事項中最早的一天，排成行事曆會從那一天開始排起，能幫助我們做跨月分的行事曆
+        sorted_events = sorted(self.events.items(), key=lambda x: (x[0], x[1]))   #date,start_time
+        recent_day = sorted_events[0][0]
+
+        return recent_day
+
+    def view_calendar(self): 
         sorted_events = sorted(self.events.items(), key=lambda x: (x[0], x[1]))
         output_cal = []
         for date, events in sorted_events:
-            #print(f"Date: {date}")
             sorted_events_by_time = sorted(events.items(), key=lambda x: x[0])
             for start_time, event in sorted_events_by_time:
-                #print(f"  - {start_time} to {event['end_time']}: {event['name']}")
                 output_cal.append([date[0:4], date[5:7], date[8:], start_time, event['end_time'], event['name']])
         return output_cal
         
-    def find_spacetime(self, date):
-        
+    def find_spacetime(self, date):    #找尋指定date的空閒時間，
         events = self.events.get(date, {})  #starttime, event
         sorted_events = sorted(events.items())
         free_time_slots = []
         totaltime = timedelta()
-        prev_end_time = datetime.strptime('08:00', '%H:%M')
-        end_of_day = datetime.strptime('00:00', '%H:%M') + timedelta(days=1)
+        prev_end_time = datetime.strptime('08:00', '%H:%M')   #最早時間
+        end_of_day = datetime.strptime('21:00', '%H:%M')      #最晚時間
 
 
         if len(sorted_events) != 0: 
@@ -228,34 +285,32 @@ class Calender_schedule:
 
         return total_spacetime, totaltime
         
-    # def find_enough_time(self):   #迴圈找enough
-    #     self.demandtime = self[]
         
 
-def days_until_target_date(target_date):
+def days_until_target_date(recent_day,target_date):
 
-    now = datetime.now()
+    recent_day = datetime.strptime(recent_day, '%Y-%m-%d')
     datetime_obj = datetime.strptime(target_date, '%Y-%m-%d %H:%M:%S')
-    time_difference = datetime_obj - now
+    time_difference = datetime_obj - recent_day 
 
     return time_difference
 
-def days_need_to_be_considered (l1st):  #需要考慮的日期
+def days_need_to_be_considered (recent_day,l1st):  #需要考慮的日期
 
-    target_day = max(l1st, key=lambda schedule: days_until_target_date(schedule[3]))
-    today = datetime.now().date()
+    target_day = max(l1st, key=lambda schedule: days_until_target_date(recent_day,schedule[3]))
     datetime_obj = datetime.strptime(target_day[3], '%Y-%m-%d %H:%M:%S')
+    recent_day = datetime.strptime(recent_day, '%Y-%m-%d').date()
     target_date = datetime_obj.date()
     consider_days = []
-    while today<= target_date:
-        consider_days.append(today)
-        today += timedelta(days=1)
+    while recent_day<= target_date:
+        consider_days.append(recent_day)
+        recent_day += timedelta(days=1)
     return consider_days
 
 # 演算  找enoughtime 然後不超過10小時 不過23:59 若時間到之前超過10小時也沒辦法
-def scheduledEvent(l1st):
-    sorted_list1 = sorted(filter(lambda schedule: schedule[1] <= 2, l1st), key=lambda schedule: (days_until_target_date(schedule[3]), schedule[1], schedule[2]))
-    sorted_list2 = sorted(filter(lambda schedule: schedule[1] > 2, l1st), key=lambda schedule: (days_until_target_date(schedule[3]), schedule[1], schedule[2]))
+def scheduledEvent(recent, l1st):
+    sorted_list1 = sorted(filter(lambda schedule: schedule[1] <= 2, l1st), key=lambda schedule: (days_until_target_date(recent,schedule[3]), schedule[1], schedule[2]))
+    sorted_list2 = sorted(filter(lambda schedule: schedule[1] > 2, l1st), key=lambda schedule: (days_until_target_date(recent, schedule[3]), schedule[1], schedule[2]))
     merged_list = sorted_list1 + sorted_list2
 
     return merged_list
@@ -276,17 +331,17 @@ def to_algorithm(fixedtimetable, demand):
         times_sorted = sorted(times)
         out_put = [demand[0], times_sorted[0][1], times_sorted[0][2].strftime('%H:%M'), (times_sorted[0][2] + duration).strftime('%H:%M')]  # # 固定List == 名稱, 日期, 開始, 結束
     else:
-        out_put = demand[0]
+        out_put = [demand[0]]
     return out_put
-
+'''
 # 使用範例
-a = [   ['Meeting','2023-07-28', '10:00', '12:00'],['Lunch','2023-07-28', '14:00', '15:30'],
-        ['Meeting','2023-07-29', '09:00', '11:00'],['Lunch','2023-07-29', '12:00', '13:30'],
-        ['Lunch','2023-07-30', '14:00', '15:30'],['tutor','2023-07-30', '19:00', '21:30'],
-        ['trip','2023-07-31', '11:00', '15:30'],['Lunch','2023-08-01', '15:00', '21:30'],
-        ['Lunch','2023-08-02', '09:00', '15:30'],['school','2023-08-03', '09:00', '15:30']
+a = [   ['普通心理學','2023-07-28', '09:00', '12:00'],['消費者行為','2023-07-29', '14:00', '17:20'],
+        ['商管程','2023-07-28', '17:00', '21:00'],['討論報告','2023-07-30', '12:00', '13:00'],
+        ['會計一上','2023-07-31', '14:00', '17:30'],['家教','2023-07-30', '19:00', '21:00'],
+        ['討論報告','2023-07-31', '11:00', '12:00'],['社團活動','2023-08-01', '15:00', '21:30'],
+        ['休息','2023-08-02', '09:00', '15:30'],['休息','2023-08-03', '09:00', '15:30']
      ]
-     
+
 schedule_name = []
 for i in a:
   schedule_name.append(i[0])
@@ -297,23 +352,45 @@ schedule_list1 = [
     ['Task2', 1, 2, '2023-08-02 16:00:00'],
     ['Task3', 2, 3, '2023-08-01 16:00:00'],
     ['Task4', 2, 4, '2023-08-01 16:00:00'],
-    ['Task5', 2, 15, '2023-08-01 16:00:00']
+    ['Task5', 2, 15, '2023-08-01 16:00:00'],
+    ['Task6', 2, 3, '2023-08-01 16:00:00'],
+    ['Task7', 2, 3, '2023-08-01 16:00:00'],
+    ['Task8', 2, 3, '2023-08-01 16:00:00'],
+    ['Task9', 2, 15, '2023-08-01 16:00:00'],
+    ['Task10', 2, 15, '2023-08-01 16:00:00'],
 ]   #  名稱, 重要度, 大約需要時間,截止時間
+
+'''
+a = cal.return_input
+
+schedule_name = []
+for i in a:
+  schedule_name.append(i[0])
+#之後用來比對
+
+schedule_list1 = cal2.return_input
+ #  名稱, 重要度, 大約需要時間,截止時間
+
 
 calendar = Calender_schedule()
 for event_data in a:
     calendar.add_fixed_event(*event_data)    #把固定加進去
-# view = scheduledEvent(schedule_list1)  ##需要排程的list整理
+g = calendar.find_recent_day()
+# print(g)
+view = scheduledEvent(g,schedule_list1)  ##需要排程的list整理
 # print(view)
 
-# 空閒時間段檢查
-#1.計算總共需要計算的時間
-consider_day = days_need_to_be_considered(schedule_list1)
-#   2. 總共空閒時間
-total_space_day, total_time_perday = calendar.find_total_spacetime(consider_day) 
+# # 空閒時間段檢查
+# #1.計算總共需要計算的時間
+consider_day = days_need_to_be_considered(g,schedule_list1)
+#print(consider_day)
+test = consider_day[-1] - consider_day[0]
 
-for row in schedule_list1:
-    cannot_be_schedule = []
+# #   2. 總共空閒時間
+total_space_day, total_time_perday = calendar.find_total_spacetime(consider_day) 
+cannot_be_schedule = []
+
+for row in view:
     schedule_row = to_algorithm(total_space_day, row)
     if len(schedule_row) != 1:
         calendar.add_fixed_event(*schedule_row)
@@ -328,6 +405,37 @@ for row in schedule_list1:
     else:
         cannot_be_schedule.append(schedule_row)
 
+calendar = Calender_schedule()
+for event_data in a:
+    calendar.add_fixed_event(*event_data)    #把固定加進去
+# view = scheduledEvent(schedule_list1)  ##需要排程的list整理
+# print(view)
+
+# # 空閒時間段檢查
+# #1.計算總共需要計算的時間
+consider_day = days_need_to_be_considered(g,schedule_list1)
+#print(consider_day)
+test = consider_day[-1] - consider_day[0]
+#print(test)
+# #   2. 總共空閒時間
+total_space_day, total_time_perday = calendar.find_total_spacetime(consider_day) 
+cannot_be_schedule = []
+
+cannot_be_schedule = []
+for row in schedule_list1:
+    schedule_row = to_algorithm(total_space_day, row)
+    if len(schedule_row) != 1:
+        calendar.add_fixed_event(*schedule_row)
+        # calendar.view_calendar()
+        total_space_day, total_time_perday = calendar.find_total_spacetime(consider_day)
+        #測試
+        # for date, values in total_space_day.items():
+        #     print(f"空閒時間 ({date}):")
+        #     for start_time, end_time, time_left in values:
+        #         print(f"  - {start_time.strftime('%H:%M')} to {end_time.strftime('%H:%M')}, left_time: {str(time_left)}")
+        #     print(f"總花費時間 ({total_time_perday[date]})")         
+    else:
+        cannot_be_schedule.append(schedule_row[0])
 
 # 輸出 排進去的日曆 跟全部的剩餘時間
 output = calendar.view_calendar()
@@ -354,16 +462,18 @@ for date, values in total_space_day.items():
 
 #進入生出日曆的階段
 
-
 class Calender_main(tk.Frame):
   def __init__(self):
     tk.Frame.__init__(self)
+    self.configure(bg = 'azure')
     self.grid()
     self.createDays()
     self.createTimes() 
     self.creatWidget()
     self.schedule_generate()
     self.creat_none()
+#初始函數，生成日歷視窗
+   
   def createDays(self):
     start_day = day_list[0]
     day_list_use = []
@@ -376,21 +486,28 @@ class Calender_main(tk.Frame):
       column_weekdays = tk.Label(self, text = str(day_list_use[i]), height = 1,\
                                  width = 3, font = font1)   
       column_weekdays.grid(row = 0, column = i+1, sticky = tk.W)
-      
+      column_weekdays.configure(bg = 'azure')
+#根據輸入的日期範圍顯現日期
+    
   def createTimes(self):
     font2 = tkFont.Font(size = 18, family = 'Times New Roman')
     for i in range(13):
       row_times = tk.Label(self, text = str(8+i)+'-'+str(8+i+1), font = font2)
       row_times.grid(row = i+1, column = 0)
-   
+      row_times.configure(bg = 'azure')
+#可使用時間:8.-21.
+      
   def creatWidget(self):
     font3 = tkFont.Font(size = 18, family = 'Times New Roman')
     for i in range(1, days_needed+1):
     #橫
       for a in range(1,14):
       #直
-        workAppend = tk.Button(self, text = '  ',height = 1, width = 4,font = font3)
+        workAppend = tk.Button(self, text = '  ',height = 1, width = 10,font = font3)
         workAppend.grid(row = a, column = i)
+        workAppend.configure(bg = 'azure')
+#創造基底，用按鈕是方便未來更新功能
+        
   def widgetCommand(self): 
     newWindow = tk.Toplevel(self)
     font1 = tkFont.Font(size = 18, family = 'Times New Roman')
@@ -398,14 +515,15 @@ class Calender_main(tk.Frame):
     remind = tk.Label(newWindow, text = '請輸入該事項的詳細資訊', font = font1)
     title_now.grid(row = 0,column = 0)
     remind.grid(row = 1,column = 0)
-    a = tk.Text(newWindow, height = 7, width = 15,font = font1)
-    a.grid(row = 2,column = 0)
+    input_command = tk.Text(newWindow, height = 7, width = 15,font = font1)
+    input_command.grid(row = 2,column = 0,columnspan = 10)
+#按鈕的機能，不過目前實用性有限
+   
   def schedule_generate(self):
   #output的每一項是[YYYY,MM,DD,開始時間,結束時間,名稱]
     font4 = tkFont.Font(size = 12, family = 'Times New Roman')
     output_processed = []
     date_first = day_list[0]
-    
     for i in range(len(output)):
       date_now = output[i][1] + '/' + output[i][2]
       date_now = datetime.strptime(date_now, "%m/%d")
@@ -415,22 +533,30 @@ class Calender_main(tk.Frame):
       end_time = int(output[i][4][:2])
       output_processed.append([column_now,(start_time-8+1),(end_time-8),output[i][5]])
     for i in output_processed:
-      new_work = tk.Button(self, text = i[3],height = ((i[2])\
-                - i[1])*3, width = 4,font = font4, command = self.widgetCommand) 
+      new_work = tk.Button(self, text = i[3],height = ((i[2])- i[1])*3,\
+                           width = 10,font = font4,\
+                           activebackground='turquoise',\
+                           command = self.widgetCommand) 
       new_work.grid(row = i[1], column = i[0],rowspan = (i[2])\
                 - i[1]+1) 
       if schedule_name.count(i[3]) != 0:        
-        new_work.configure(bg="yellow")  
+        new_work.configure(bg="aquamarine")  
       else:
-        new_work.configure(bg="green")  
+        new_work.configure(bg="skyblue")  
+#生出所有酷酷的行程
+        
   def creat_none(self):
-    print(cannot_be_schedule)
-    '''
     if cannot_be_schedule != []:
       font1 = tkFont.Font(size = 18, family = 'Times New Roman')
-      cont_title = tk.Label(self, text = '無法排入的事項:', font = font1) 
-      for i in range(len(cannot_be_schedule)) 
-    '''       
+      cant_title = tk.Label(self, text = '無法排入的事項:', font = font1) 
+      cant_title.grid(row = 0, column = days_needed + 2,columnspan = 3) 
+      cant_title.configure(bg = 'azure')      
+      for i in range(len(cannot_be_schedule)):
+        cant_arrange = tk.Label(self, text = cannot_be_schedule[i], font = font1) 
+        cant_arrange.grid(row = i+1, column = days_needed + 2,columnspan = 3) 
+        cant_arrange.configure(bg = 'azure')
+#沒辦法排程的事件會在這裡顯現出來
+
 cal = Calender_main()
 cal.master.title('日歷')
 cal.mainloop()
